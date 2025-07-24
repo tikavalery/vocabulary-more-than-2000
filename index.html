@@ -1,143 +1,4 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translate and Speak</title>
-</head>
-<body>
-    <h1>Translate and Speak</h1>
-    <button onclick="processWords()">Translate and Speak</button>
-    <div id="results"></div>
 
-    <script>
-        const wordList = [
-            "Apple", // English
-            "Manzana", // Spanish
-            "Animal", // English
-            "Animal", // Spanish
-            "Area", // English
-            "Área", // Spanish
-            "Hello", // English
-            "Hola" // Spanish
-        ];
-
-        async function translateWord(word) {
-            const apiKey = 'YOUR_API_KEY'; // Replace with your API key
-            const translateUrl = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
-
-            const response = await fetch(translateUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    q: word,
-                    target: 'es'
-                })
-            });
-
-            const data = await response.json();
-            return data.data.translations[0].translatedText;
-        }
-
-        function speakWord(word, lang) {
-            const utterance = new SpeechSynthesisUtterance(word);
-            utterance.lang = lang;
-            speechSynthesis.speak(utterance);
-        }
-
-        async function processWords() {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = ''; // Clear previous results
-
-            for (let word of wordList) {
-                let lang = 'en'; // Default to English
-                let translatedWord = '';
-
-                // Simple check for Spanish (could be improved)
-                if (/^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/.test(word)) {
-                    if (wordList.includes(word)) {
-                        // If the word exists in the list, treat it as Spanish
-                        lang = 'es';
-                    }
-                } else {
-                    // Assume it's English if it doesn't match Spanish criteria
-                    translatedWord = await translateWord(word);
-                }
-
-                // Display and speak the word
-                const wordDisplay = document.createElement('p');
-                if (lang === 'en') {
-                    wordDisplay.innerText = `${word} (English)`;
-                    speakWord(word, 'en-US');
-                    if (translatedWord) {
-                        wordDisplay.innerText += ` => ${translatedWord} (Spanish)`;
-                        speakWord(translatedWord, 'es-ES');
-                    }
-                } else {
-                    wordDisplay.innerText = `${word} (Spanish)`;
-                    speakWord(word, 'es-ES');
-                }
-
-                resultsDiv.appendChild(wordDisplay);
-            }
-        }
-    </script>
-</body>
-</html> -->
-<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Translate and Speak</title>
-</head>
-<body>
-    <h1>Translate and Speak</h1>
-    <button onclick="processWords()">Translate and Speak</button>
-    <div id="results"></div>
-
-    <script>
-        const wordsText = "Analyze - Analizar\nAttempt - Intento\nAcquire - Adquirir\nAllow - Permitir\nAppreciate - Apreciar\nAttain - Alcanzar\nAccept - Aceptar\nAvert - Evitar";
-        const wordPairs = wordsText.split('\n'); // Split the text by new lines
-
-        const translations = {};
-        wordPairs.forEach(pair => {
-            const [english, spanish] = pair.split(' - ');
-            translations[english.trim()] = spanish.trim();
-        });
-
-        function isSpanish(word) {
-            // Basic check for Spanish characters
-            return /^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$/.test(word);
-        }
-
-        function speakWord(word, lang) {
-            const utterance = new SpeechSynthesisUtterance(word);
-            utterance.lang = lang;
-            speechSynthesis.speak(utterance);
-        }
-
-        async function processWords() {
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = ''; // Clear previous results
-
-            for (let [english, spanish] of Object.entries(translations)) {
-                // Display and speak English word
-                const wordDisplay = document.createElement('p');
-                wordDisplay.innerText = `${english} (English) => ${spanish} (Spanish)`;
-                speakWord(english, 'en-US'); // Speak in English
-                speakWord(spanish, 'es-ES'); // Speak translation in Spanish
-
-                resultsDiv.appendChild(wordDisplay);
-            }
-        }
-    </script>
-</body>
-</html> -->
 
 
 <!-- ///////////////////////////////////////////////////////////////////////////////////// -->
@@ -183,6 +44,441 @@
     <script>
         const wordPairs = `
             able	capaz
+agent	agente
+agree	estar de acuerdo
+agreement	acuerdo
+ahead	adelante
+air	aire
+airport	aeropuerto
+all	todo
+almost	casi
+alone	solo
+along	a lo largo de
+already	ya
+also	también
+although	aunque
+always	siempre
+amazing	asombroso
+among	entre
+amount	cantidad
+analysis	análisis
+animal	animal
+English	Spanish
+answer	respuesta
+any	cualquier
+anyone	cualquiera
+anything	cualquier cosa
+apply	aplicar
+area	área
+argue	discutir
+argument	argumento
+arise	surgir
+arm	brazo
+army	ejército
+around	alrededor
+arrange	organizar
+art	arte
+article	artículo
+artist	artista
+as	como
+ask	preguntar
+asleep	dormido
+aspect	aspecto
+assess	evaluar
+assignment	tarea
+assist	asistir
+assume	asumir
+athlete	atleta
+attach	adjuntar
+attempt	intento
+attention	atención
+attorney	abogado
+attract	atraer
+audience	audiencia
+author	autor
+authority	autoridad
+auto	auto
+available	disponible
+average	promedio
+avoid	evitar
+award	premio
+aware	consciente
+away	lejos
+ability	habilidad
+absent	ausente
+absolutely	absolutamente
+absorb	absorber
+abstract	abstracto
+abundance	abundancia
+abuse	abuso
+academic	académico
+accept	aceptar
+access	acceso
+accident	accidente
+accompany	acompañar
+accomplish	lograr
+according	según
+account	cuenta
+accumulate	acumular
+accurate	preciso
+accuse	acusar
+achieve	lograr
+acknowledge	reconocer
+acquire	adquirir
+act	actuar
+activate	activar
+actual	actual
+adapt	adaptar
+add	añadir
+addition	adición
+address	dirección
+adjust	ajustar
+administer	administrar
+admire	admirar
+adopt	adoptar
+adult	adulto
+advance	avanzar
+advantage	ventaja
+adventure	aventura
+advertise	anunciar
+advice	consejo
+advise	aconsejar
+advocate	defensor
+affect	afectar
+affection	afecto
+afford	permitir
+afraid	asustado
+agency	agencia
+agree	acordar
+agriculture	agricultura
+aid	ayuda
+aim	objetivo
+alarm	alarma
+album	álbum
+alert	alerta
+alive	vivo
+allow	permitir
+alter	alterar
+alternative	alternativa
+amaze	asombrar
+amuse	divertir
+analyze	analizar
+ancient	antiguo
+anger	ira
+angle	ángulo
+announce	anunciar
+annual	anual
+anticipate	anticipar
+anxiety	ansiedad
+apart	aparte
+apologize	disculparse
+appeal	apelación
+appoint	nombrar
+appreciate	apreciar
+approach	acercarse
+appropriate	apropiado
+approve	aprobar
+arrive	llegar
+assign	asignar
+associate	asociar
+assure	asegurar
+atmosphere	atmósfera
+attend	asistir
+attitude	actitud
+automatic	automático
+awesome	impresionante
+axis	eje
+abbreviation	abreviatura
+abnormal	anormal
+aboard	a bordo
+absurd	absurdo
+accent	acento
+acceptance	aceptación
+accessible	accesible
+accidental	accidental
+accord	acuerdo
+accuracy	exactitud
+actual	real
+additional	adicional
+addict	adicto
+admirable	admirable
+admission	admisión
+admit	admitir
+aesthetic	estético
+affectation	afectación
+affiliation	afiliación
+affirm	afirmar
+agenda	agenda
+aggregate	agregado
+aggressive	agresivo
+airlift	transporte aéreo
+aisle	pasillo
+alias	alias
+alien	extraterrestre
+align	alinear
+allocate	asignar
+altitude	altitud
+altogether	en conjunto
+amplify	amplificar
+analyst	analista
+ancestor	ancestro
+animate	animar
+app	aplicación
+appendix	apéndice
+application	solicitud
+approach	acercar
+approximate	aproximado
+architect	arquitecto
+archive	archivo
+arithmetic	aritmética
+arrangement	disposición
+arrest	arrestar
+artificial	artificial
+ascend	ascender
+assert	afirmar
+assumption	suposición
+astonish	asombrar
+attack	ataque
+auction	subasta
+arouse	despertar
+articulate	articular
+abandon	abandonar
+abbreviate	abreviar
+abject	abyecto
+abolish	abolir
+about-face	vuelta atrás
+absolute	absoluto
+absolve	absolver
+absorbent	absorbente
+abstain	abstenerse
+absurdity	absurdo
+accelerate	acelerar
+acceptable	aceptable
+accessibly	accesiblemente
+accomplice	cómplice
+accumulative	acumulativo
+accustomed	acostumbrado
+active	activo
+actuality	realidad
+actualize	actualizar
+adaptative	adaptativo
+addictive	adictivo
+addition	suma
+adjuster	ajustador
+admiration	admiración
+adulting	adultez
+advance	avance
+advantageous	ventajoso
+adversarial	adversarial
+advertisement	publicidad
+advisement	asesoramiento
+aerial	aéreo
+aerodynamics	aerodinámica
+affective	afectivo
+affirmation	afirmación
+affliction	aflicción
+affluent	afluente
+affordably	asequible
+afterthought	reflexión posterior
+agglomerate	aglomerar
+agitate	agitar
+agnostic	agnóstico
+agonize	agonizar
+agreeably	amigablemente
+agreeable	aceptable
+alibi	coartada
+alienate	alienar
+allegiance	lealtad
+alleviate	aliviar
+amalgamate	amalgamar
+amiable	amigable
+ample	amplio
+amputate	amputar
+amusing	divertido
+ancestry	ascendencia
+animalistic	animalista
+anonymous	anónimo
+antagonistic	antagónico
+abduction	secuestro
+abominable	abominable
+about-turn	vuelta atrás
+abusive	abusivo
+acclamation	aclamación
+accolade	reconocimiento
+accommodate	acomodar
+accorded	acordado
+accredit	acreditar
+accuracy	precisión
+achievability	alcanzabilidad
+acid	ácido
+acoustic	acústico
+acquit	absolver
+acrobatics	acrobacias
+actionably	en acción
+activism	activismo
+actuate	activar
+adaptively	adaptativamente
+additive	aditivo
+adieu	adiós
+adjacently	adyacente
+adulthood	adultez
+advanceable	avanzable
+advantageously	ventajosamente
+adventurous	aventurero
+adverse	adverso
+advocacy	defensa
+affected	afectado
+aggravate	agravar
+aggregate	agregar
+agonizing	agonizante
+alertness	alerta
+alignment	alineación
+alike	parecido
+amass	acumular
+amateur	aficionado
+amazing	increíble
+ambassador	embajador
+ambition	ambición
+ambiguous	ambiguo
+amounting	que asciende
+amplification	amplificación
+amputee	amputado
+anecdotal	anecdótico
+angelic	angelical
+animated	animado
+anomaly	anomalía
+answerable	responsable
+apostle	apóstol
+applicable	aplicable
+appointed	nombrado
+apportion	repartir
+appreciable	apreciable
+approach	acercamiento
+approval	aprobación
+architecture	arquitectura
+argue	argumentar
+argumentation	argumentación
+armchair	sillón
+armed	armado
+aroma	aroma
+ashamed	avergonzado
+assertion	afirmación
+assessable	evaluable
+assessment	evaluación
+asset	activo
+astounding	asombroso
+astute	astuto
+atmospheric	atmosférico
+attach	unir
+attestation	atestación
+attraction	atracción
+automate	automatizar
+autonomously	autónomamente
+availability	disponibilidad
+ablaze	en llamas
+aboriginal	aborigen
+abortive	abortivo
+abroad	en el extranjero
+abrupt	abrupto
+absence	ausencia
+absorbed	absorbido
+accessory	accesorio
+acclaim	aclamar
+ace	as
+ache	dolor
+acknowledgment	reconocimiento
+addiction	adicción
+adequate	adecuado
+adjacent	adyacente
+adjustment	ajuste
+admittedly	a decir verdad
+advent	llegada
+adviser	asesor
+affectionate	afectuoso
+afflict	afligir
+affront	agravio
+against	contra
+age	edad
+aggression	agresión
+agony	agonía
+allot	repartir
+allude	aludir
+ally	aliado
+amazing	impresionante
+ambiguity	ambigüedad
+ambitious	ambicioso
+angel	ángel
+anguish	angustia
+annals	anales
+anticipation	anticipación
+appointment	cita
+aptitude	aptitud
+arrangement	arreglo
+astonishing	asombroso
+attest	atestiguar
+accountability	responsabilidad
+accumulator	acumulador
+achievability	realizabilidad
+acquiescence	acquiescencia
+acquitted	absuelto
+actuate	accionar
+adaptable	adaptable
+adaptive	adaptativo
+adjudicate	adjudicar
+adoration	adoración
+adventitious	adventicio
+advertise	publicitar
+advertisement	anuncio
+advisable	aconsejable
+advisor	consejero
+affinity	afinidad
+aggregate	totalizar
+aggression	agresividad
+agreeable	agradable
+agricultural	agrícola
+alarmingly	alarmantemente
+alertness	vigilancia
+alias	seudónimo
+alongside	al lado
+altercation	altercado
+alternate	alternar
+amazement	asombro
+amusing	entretenido
+ancestor	antepasado
+annuity	anualidad
+antique	antigüedad
+anybody	cualquiera
+anyway	de todos modos
+apathetic	apático
+append	añadir
+application	aplicación
+approximate	aproximar
+astounding	sorprendente
+autonomy	autonomía
+        `;
+
+        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
+
+        document.getElementById('start').addEventListener('click', () => {
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = ''; // Clear previous output
+
+            words.forEach(([english, spanish]) => {
+                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
+                speakWord(english, 'en-US'); // English audio
+                speakWord(spanish, 'es-ES'); // Spanish audio
+            });
+        });
+
+        function speakWord(text, lang) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = lang;
+            window.speechSynthesis.speak(utterance);
+        }
+    </script>
+</body>
+</html>
+<!-- able	capaz
             about	sobre
             above	encima de
             accept	aceptar
@@ -1128,27 +1424,4 @@ average	promedio
 award	premio
 aware	consciente
 awesome	impresionante
-axis	eje
-        `;
-
-        const words = wordPairs.trim().split('\n').map(line => line.split('\t'));
-
-        document.getElementById('start').addEventListener('click', () => {
-            const outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = ''; // Clear previous output
-
-            words.forEach(([english, spanish]) => {
-                outputDiv.innerHTML += `<p>${english} - ${spanish}</p>`;
-                speakWord(english, 'en-US'); // English audio
-                speakWord(spanish, 'es-ES'); // Spanish audio
-            });
-        });
-
-        function speakWord(text, lang) {
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = lang;
-            window.speechSynthesis.speak(utterance);
-        }
-    </script>
-</body>
-</html>
+axis	eje -->

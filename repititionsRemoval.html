@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unique Word Pairs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 1rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+    button {
+      display: block;
+      margin: 0 auto 2rem;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    table {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+    th {
+      background-color: #007BFF;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    pre {
+      background: #eee;
+      padding: 1rem;
+      max-width: 600px;
+      margin: 2rem auto;
+      white-space: pre-wrap;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Unique English-Spanish Word Pairs</h1>
+  <textarea id="inputArea" placeholder="Paste your English-Spanish word pairs here, separated by a tab\nExample:\ncake\tpastel"></textarea>
+  <button onclick="processInput()">Remove Duplicates</button>
+  <div id="wordPairs"></div>
+  <pre id="arrayOutput"></pre>
+
+  <script>
+    function processInput() {
+      const input = document.getElementById('inputArea').value.trim();
+      const lines = input.split('\n');
+      const pairSet = new Set();
+      const uniquePairs = [];
+
+      lines.forEach(line => {
+        const [eng, spa] = line.split(/\t|\s{2,}/); // tab or multiple spaces
+        if (eng && spa) {
+          const pair = JSON.stringify([eng.trim(), spa.trim()]);
+          if (!pairSet.has(pair)) {
+            pairSet.add(pair);
+            uniquePairs.push(JSON.parse(pair));
+          }
+        }
+      });
+
+      const container = document.getElementById('wordPairs');
+      container.innerHTML = '';
+
+      const table = document.createElement('table');
+      const thead = document.createElement('thead');
+      thead.innerHTML = '<tr><th>English</th><th>Spanish</th></tr>';
+      table.appendChild(thead);
+
+      const tbody = document.createElement('tbody');
+      uniquePairs.forEach(([eng, spa]) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${eng}</td><td>${spa}</td>`;
+        tbody.appendChild(row);
+      });
+      table.appendChild(tbody);
+      container.appendChild(table);
+
+      // Output array format
+      const arrayOutput = document.getElementById('arrayOutput');
+      let output = 'const words = [\n';
+      uniquePairs.forEach(([eng, spa], index) => {
+        output += `  ["${eng}", "${spa}"]${index < uniquePairs.length - 1 ? ',' : ''}\n`;
+      });
+      output += '];';
+      arrayOutput.textContent = output;
+    }
+  </script>
+</body>
+</html>
